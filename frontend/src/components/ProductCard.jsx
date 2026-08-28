@@ -14,7 +14,7 @@ function getBestImage(product) {
   }
   // 3. direct image field
   if (product.image && product.image.startsWith('http')) return product.image
-  if (product.image && product.image.startsWith('/')) return 'http://localhost:8000' + product.image
+  if (product.image && product.image.startsWith('/')) return 'https://fh-bags.onrender.com' + product.image
   // 4. image_url fallback
   if (product.image_url) return product.image_url
   // 5. placeholder

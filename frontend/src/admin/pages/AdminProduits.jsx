@@ -18,13 +18,13 @@ function getProductImg(p) {
     if (main.url && main.url.startsWith('http')) return main.url
     if (main.image_url) return main.image_url
   }
-  if (p.image && p.image.startsWith('/')) return 'http://localhost:8000' + p.image
+  if (p.image && p.image.startsWith('/')) return 'https://fh-bags.onrender.com' + p.image
   return p.image || p.image_url || FALLBACK
 }
 
 function getImgUrl(img) {
   if (img.url && img.url.startsWith('http')) return img.url
-  if (img.image && img.image.startsWith('/')) return 'http://localhost:8000' + img.image
+  if (img.image && img.image.startsWith('/')) return 'https://fh-bags.onrender.com' + img.image
   return img.image_url || FALLBACK
 }
 

@@ -8,13 +8,13 @@ const FALLBACK = 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=90
 
 function getBestImage(product) {
   if (product.main_image && product.main_image.startsWith('http')) return product.main_image
-  if (product.image && product.image.startsWith('/')) return 'http://localhost:8000' + product.image
+  if (product.image && product.image.startsWith('/')) return 'https://fh-bags.onrender.com' + product.image
   return product.image || product.image_url || FALLBACK
 }
 
 function getImageUrl(imgObj) {
   if (imgObj.url && imgObj.url.startsWith('http')) return imgObj.url
-  if (imgObj.image && imgObj.image.startsWith('/')) return 'http://localhost:8000' + imgObj.image
+  if (imgObj.image && imgObj.image.startsWith('/')) return 'https://fh-bags.onrender.com' + imgObj.image
   return imgObj.image_url || FALLBACK
 }
 

@@ -1,0 +1,89 @@
+.shipping-stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.shipping-stat-card {
+  background: #fff;
+  border: 1px solid #E8DDD0;
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.s-icon { font-size: 1.4rem; flex-shrink: 0; }
+
+.s-label {
+  font-size: 0.68rem;
+  color: #8B6748;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 2px;
+}
+
+.s-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #3D2B1F;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* Bulk bar */
+.bulk-bar {
+  background: #FFF8EE;
+  border: 1.5px solid #C9A96E;
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.bulk-inputs {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+/* Price badges */
+.price-badge {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.price-badge.domicile { background: #EAF3FD; color: #1a6bb5; }
+.price-badge.bureau   { background: #EAF6F1; color: #1a8a57; }
+
+/* Inline price edit */
+.price-edit-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.price-input {
+  width: 100px !important;
+  padding: 0.4rem 0.6rem !important;
+  font-size: 0.85rem !important;
+}
+
+.da-label {
+  font-size: 0.75rem;
+  color: #8B6748;
+  font-weight: 500;
+}
+
+@media (max-width: 1200px) {
+  .shipping-stats { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 700px) {
+  .shipping-stats { grid-template-columns: repeat(2, 1fr); }
+  .bulk-inputs    { flex-direction: column; }
+}

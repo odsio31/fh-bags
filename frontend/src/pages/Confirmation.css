@@ -1,0 +1,82 @@
+.confirmation-page { padding-bottom: 5rem; }
+
+.success-hero {
+  text-align: center;
+  padding: 3rem 1rem 2.5rem;
+  max-width: 620px;
+  margin: 0 auto;
+}
+.success-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+.success-hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--brown-dk); margin-bottom: 0.75rem; }
+.success-hero > p { font-size: 1rem; color: var(--brown); margin-bottom: 1.5rem; }
+
+.whatsapp-notice {
+  display: flex; align-items: flex-start; gap: 1rem;
+  background: #e8f5e9; border: 1px solid #a5d6a7;
+  border-radius: var(--radius-lg); padding: 1.2rem 1.5rem;
+  text-align: left; font-size: 1.4rem;
+}
+.whatsapp-notice div strong { display: block; color: #2e7d32; font-size: 0.95rem; margin-bottom: 0.3rem; }
+.whatsapp-notice div p { font-size: 0.85rem; color: #388e3c; }
+
+/* Grid */
+.confirmation-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2rem; margin: 2.5rem 0;
+}
+
+.conf-section {
+  background: var(--white); border: 1px solid var(--beige-mid);
+  border-radius: var(--radius-lg); padding: 2rem;
+}
+.conf-section h3 {
+  font-size: 1rem; font-family: var(--font-body);
+  font-weight: 600; color: var(--brown-dk);
+  margin-bottom: 1.2rem; padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--beige);
+}
+
+.conf-item {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.7rem 0; border-bottom: 1px solid var(--beige);
+}
+.conf-qty {
+  background: var(--brown-dk); color: var(--cream);
+  font-size: 0.7rem; font-weight: 700;
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.conf-name { flex: 1; font-size: 0.9rem; color: var(--brown-dk); }
+.conf-price { font-size: 0.88rem; font-weight: 600; color: var(--brown-dk); white-space: nowrap; }
+
+.conf-divider { height: 1px; background: var(--beige-mid); margin: 0.8rem 0; }
+.conf-row { display: flex; justify-content: space-between; font-size: 0.88rem; color: var(--brown); margin-bottom: 0.4rem; }
+.conf-total { font-size: 1rem; color: var(--brown-dk); }
+
+/* Info block */
+.conf-info-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.conf-info-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+.conf-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tan); flex-shrink: 0; }
+.conf-info-row span:last-child { font-size: 0.9rem; color: var(--brown-dk); text-align: right; }
+
+.liv-badge { background: var(--beige-mid); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.8rem !important; }
+.status-pill { background: #fff3cd; color: #856404; padding: 0.2rem 0.7rem; border-radius: 20px; font-size: 0.78rem !important; font-weight: 600; }
+
+.conf-actions {
+  display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+  padding-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .confirmation-grid { grid-template-columns: 1fr; }
+  .conf-actions { flex-direction: column; align-items: center; }
+}
+.conf-item-detail { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+.conf-color {
+  display: flex; align-items: center; gap: 0.35rem;
+  font-size: 0.72rem; color: var(--brown-lt);
+}
+.conf-color-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.12); flex-shrink: 0;
+}

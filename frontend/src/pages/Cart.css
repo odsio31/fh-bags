@@ -1,0 +1,160 @@
+.cart-page { padding-bottom: 5rem; }
+
+.cart-header {
+  display: flex; align-items: baseline; gap: 1rem;
+  padding: 2.5rem 0 2rem;
+  border-bottom: 1px solid var(--beige-mid);
+}
+.cart-header h1 { font-size: clamp(1.8rem, 3vw, 2.5rem); }
+.cart-header span { font-size: 0.85rem; color: var(--brown-lt); }
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 3rem;
+  padding-top: 2.5rem;
+  align-items: start;
+}
+
+/* Items */
+.cart-items { display: flex; flex-direction: column; gap: 0; }
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 100px 1fr auto auto auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--beige-mid);
+}
+
+.item-image {
+  width: 100px; height: 120px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--beige);
+  flex-shrink: 0;
+}
+.item-image img { width: 100%; height: 100%; object-fit: cover; }
+
+.item-category {
+  font-size: 0.68rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--gold);
+  display: block; margin-bottom: 0.3rem;
+}
+.item-name {
+  font-size: 1.1rem; font-weight: 400; color: var(--brown-dk);
+  margin-bottom: 0.3rem;
+  transition: color var(--dur);
+}
+.item-name:hover { color: var(--brown); }
+.item-unit-price { font-size: 0.85rem; color: var(--brown-lt); }
+
+.qty-control {
+  display: flex; align-items: center;
+  border: 1.5px solid var(--beige-mid); border-radius: var(--radius);
+}
+.qty-control button {
+  width: 34px; height: 34px; background: none; border: none;
+  font-size: 1.1rem; cursor: pointer; color: var(--brown-dk);
+  transition: background var(--dur);
+}
+.qty-control button:hover { background: var(--beige); }
+.qty-control span { min-width: 36px; text-align: center; font-size: 0.9rem; font-weight: 500; color: var(--brown-dk); }
+
+.item-subtotal { font-weight: 500; color: var(--brown-dk); min-width: 70px; text-align: right; }
+
+.remove-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--brown-lt); padding: 4px;
+  transition: color var(--dur);
+}
+.remove-btn:hover { color: #c0392b; }
+
+/* Summary */
+.cart-summary {
+  position: sticky;
+  top: calc(var(--nav-h) + 1.5rem);
+  background: var(--beige);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+}
+.cart-summary h3 {
+  font-size: 1.2rem; margin-bottom: 1.5rem;
+  padding-bottom: 1rem; border-bottom: 1px solid var(--beige-mid);
+}
+
+.summary-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.9rem; color: var(--brown);
+  margin-bottom: 0.75rem;
+}
+
+.free-shipping-notice {
+  font-size: 0.78rem; color: var(--gold);
+  background: var(--gold-lt);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.summary-divider { height: 1px; background: var(--beige-mid); margin: 1rem 0; }
+
+.summary-total {
+  font-size: 1rem; color: var(--brown-dk) !important;
+  margin-bottom: 1.5rem;
+}
+.summary-total strong { font-size: 1.1rem; }
+
+.checkout-btn {
+  width: 100%; justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.continue-link {
+  display: block; text-align: center;
+  font-size: 0.82rem; color: var(--brown-lt);
+  transition: color var(--dur);
+}
+.continue-link:hover { color: var(--brown-dk); }
+
+@media (max-width: 900px) {
+  .cart-layout { grid-template-columns: 1fr; }
+  .cart-summary { position: static; }
+}
+@media (max-width: 600px) {
+  .cart-item { grid-template-columns: 80px 1fr; grid-template-rows: auto auto; gap: 1rem; }
+  .item-qty, .item-subtotal, .remove-btn { grid-column: 2; }
+}
+
+.shipping-note { font-size: 0.8rem; color: var(--brown-lt); font-style: italic; }
+
+.livraison-info {
+  background: var(--beige-mid);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+.liv-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--brown);
+}
+.liv-option strong { color: var(--brown-dk); }
+
+.item-color-badge {
+  display: flex; align-items: center; gap: 0.4rem;
+  margin: 0.25rem 0;
+  font-size: 0.78rem; color: var(--brown);
+}
+.item-color-dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 1.5px solid rgba(0,0,0,0.12);
+  display: inline-block; flex-shrink: 0;
+}

@@ -1,0 +1,361 @@
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--nav-h);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--beige) 55%, var(--beige-mid) 100%);
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.eyebrow-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-lt);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+  width: fit-content;
+}
+
+.hero-content h1 {
+  margin-bottom: 1.2rem;
+}
+.hero-content h1 em {
+  font-style: italic;
+  color: var(--brown);
+}
+
+.hero-content p {
+  font-size: 1.05rem;
+  max-width: 420px;
+  margin-bottom: 2.5rem;
+  line-height: 1.8;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-outline {
+  border-color: var(--brown-dk);
+}
+
+.hero-image-wrap {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-float-tag {
+  position: absolute;
+  bottom: 3rem;
+  left: -1rem;
+  background: var(--white);
+  padding: 1rem 1.4rem;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 30px rgba(30,18,8,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hero-float-tag span { font-size: 0.7rem; color: var(--tan); text-transform: uppercase; letter-spacing: 0.1em; }
+.hero-float-tag strong { font-size: 0.95rem; color: var(--brown-dk); }
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 3;
+  color: var(--brown);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--brown), transparent);
+  animation: scrollPulse 1.5s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 1; transform: scaleY(1); }
+  50% { opacity: 0.4; transform: scaleY(0.7); }
+}
+
+/* ── Marquee ──────────────────────────────────────────────────────────── */
+.marquee-strip {
+  background: var(--brown-dk);
+  overflow: hidden;
+  padding: 0.9rem 0;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+.marquee-track span {
+  white-space: nowrap;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+  padding: 0 2rem;
+}
+.dot { color: var(--gold); margin-left: 2rem; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Categories ───────────────────────────────────────────────────────── */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.category-card {
+  display: block;
+  text-decoration: none;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--beige);
+}
+
+.cat-img-wrap {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+.cat-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+.category-card:hover .cat-img-wrap img { transform: scale(1.05); }
+
+.cat-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--brown-dk);
+  background: var(--beige);
+  transition: background var(--dur);
+}
+.category-card:hover .cat-label {
+  background: var(--beige-mid);
+}
+
+/* ── Products Grid ────────────────────────────────────────────────────── */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+/* ── Why Section ──────────────────────────────────────────────────────── */
+.why-section { background: var(--beige); }
+
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.why-text .eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+.why-text h2 em { font-style: italic; color: var(--brown); }
+.why-text > p { margin: 1.2rem 0; font-size: 1rem; line-height: 1.8; }
+
+.why-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.why-list li {
+  font-size: 0.92rem;
+  color: var(--brown);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.check {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.why-image {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.why-image img { width: 100%; border-radius: var(--radius); }
+
+.why-badge {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: var(--white);
+  border-radius: 50%;
+  width: 90px; height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(30,18,8,0.2);
+}
+.badge-number { font-family: var(--font-display); font-size: 1.4rem; color: var(--brown-dk); font-weight: 600; }
+.badge-label  { font-size: 0.55rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brown); text-align: center; line-height: 1.3; }
+
+/* ── CTA Banner ───────────────────────────────────────────────────────── */
+.cta-banner {
+  background: var(--brown-dk);
+  padding: 5rem 0;
+  text-align: center;
+}
+.cta-banner h2 { color: var(--cream); margin-bottom: 0.75rem; }
+.cta-banner p  { color: var(--tan); margin-bottom: 2rem; font-size: 1rem; }
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .products-grid    { grid-template-columns: repeat(2, 1fr); }
+  .categories-grid  { grid-template-columns: repeat(2, 1fr); }
+  .why-grid         { grid-template-columns: 1fr; gap: 2.5rem; }
+  .why-image        { order: -1; max-height: 450px; overflow: hidden; }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .hero-image-wrap {
+    height: 55vw;
+    min-height: 300px;
+  }
+  .hero-content {
+    padding: 3rem 1.25rem 2rem;
+  }
+  .hero-scroll { display: none; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+  .categories-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .products-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+}
+
+/* Hero delivery badges */
+.hero-delivery-badges {
+  display: flex; flex-wrap: wrap; gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+.hero-delivery-badges span {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(201,169,110,0.3);
+  color: var(--brown-dk);
+  font-size: 0.72rem; font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+}
+
+/* How to Order Steps */
+.how-section { background: var(--beige); }
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.step-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  position: relative;
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(107,76,59,0.12);
+}
+
+.step-num-badge {
+  position: absolute;
+  top: -14px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold);
+  color: var(--espresso);
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.7rem;
+  border-radius: 20px;
+}
+
+.step-icon { font-size: 2.2rem; margin: 0.75rem 0 1rem; }
+
+.step-card h3 {
+  font-size: 1rem; margin-bottom: 0.6rem; color: var(--brown-dk);
+}
+.step-card p { font-size: 0.85rem; color: var(--brown); line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 500px) {
+  .steps-grid { grid-template-columns: 1fr; }
+  .hero-delivery-badges { gap: 0.4rem; }
+  .hero-delivery-badges span { font-size: 0.65rem; }
+}

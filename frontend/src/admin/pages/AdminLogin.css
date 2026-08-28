@@ -1,0 +1,26 @@
+.admin-login-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1E1208 0%, #3D2B1F 50%, #6B4C3B 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+}
+.login-card {
+  background: #fff; border-radius: 16px;
+  padding: 2.5rem; width: 100%; max-width: 400px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+  text-align: center;
+}
+.login-logo { display: flex; align-items: baseline; gap: 0.4rem; justify-content: center; margin-bottom: 1.5rem; }
+.login-logo .logo-fh   { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: #C9A96E; font-weight: 600; }
+.login-logo .logo-admin { font-size: 0.7rem; letter-spacing: 0.3em; color: #8B6748; font-weight: 500; }
+.login-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: #3D2B1F; margin-bottom: 0.4rem; }
+.login-sub  { font-size: 0.85rem; color: #8B6748; margin-bottom: 2rem; }
+.login-form { text-align: left; }
+.login-error {
+  background: #fdf2f2; border: 1px solid #f5c6c6;
+  color: #c0392b; padding: 0.7rem; border-radius: 6px;
+  font-size: 0.83rem; margin-bottom: 1rem;
+}
+.login-btn { width: 100%; justify-content: center; padding: 0.85rem; font-size: 0.85rem; margin-top: 0.5rem; }
+.back-site { display: block; margin-top: 1.5rem; font-size: 0.8rem; color: #8B6748; text-decoration: none; }
+.back-site:hover { color: #3D2B1F; }

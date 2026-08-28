@@ -95,5 +95,5 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
-CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:5173').split(',')
+CORS_ALLOWED_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True

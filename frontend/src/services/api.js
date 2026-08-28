@@ -18,3 +18,4 @@ export const getOrder    = (id)   => API.get(`/orders/${id}/`)
 export default API
 
 export const getShippingRates = () => API.get('/shipping/')
+

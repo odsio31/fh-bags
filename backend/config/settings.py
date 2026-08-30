@@ -5,32 +5,32 @@ from datetime import timedelta
 import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-fhbags-2025')
 
 IS_RENDER = 'RENDER' in os.environ
-DEBUG = config('DEBUG', default=not IS_RENDER, cast=bool)
+DEBUG     = config('DEBUG', default=not IS_RENDER, cast=bool)
 
-ALLOWED_HOSTS = ['fh-bags.onrender.com', 'localhost', '127.0.0.1', '.onrender.com', '*']
+ALLOWED_HOSTS = ['fh-bags.onrender.com', 'localhost', '127.0.0.1', '.onrender.com']
 
-# ── CSRF & SSL Configuration ──────────────────────────
+# ── CSRF & SSL ────────────────────────────────────────────────
 if IS_RENDER:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    USE_X_FORWARDED_HOST = True
-    USE_X_FORWARDED_PORT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
+    USE_X_FORWARDED_HOST    = True
+    USE_X_FORWARDED_PORT    = True
+    SESSION_COOKIE_SECURE   = True
+    CSRF_COOKIE_SECURE      = True
 else:
     SESSION_COOKIE_SECURE = False
-    CSRF_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE    = False
 
 CSRF_TRUSTED_ORIGINS = [
     'https://fh-bags.onrender.com',
     'http://localhost:8000',
-    'http://127.0.0.1:8000',
-    'http://localhost:3000',
     'http://localhost:5173',
 ]
 
+# ── Apps ──────────────────────────────────────────────────────
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,8 +51,9 @@ INSTALLED_APPS = [
     'shipping',
 ]
 
+# ── Middleware ────────────────────────────────────────────────
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # يجب أن يظل في البداية
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -67,7 +68,7 @@ ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [{
     'BACKEND': 'django.template.backends.django.DjangoTemplates',
-    'DIRS': [], 
+    'DIRS': [],
     'APP_DIRS': True,
     'OPTIONS': {'context_processors': [
         'django.template.context_processors.debug',
@@ -79,7 +80,7 @@ TEMPLATES = [{
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# ── Database ──────────────────────────────────────────
+# ── Database — Neon (prod) ou SQLite (local) ──────────────────
 DATABASE_URL = config('DATABASE_URL', default=None)
 
 if DATABASE_URL:
@@ -87,40 +88,54 @@ if DATABASE_URL:
         'default': dj_database_url.config(
             default=DATABASE_URL,
             conn_max_age=600,
-            ssl_require=False
+            ssl_require=True,
         )
     }
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+            'NAME':   BASE_DIR / 'db.sqlite3',
         }
     }
 
-LANGUAGE_CODE = 'fr-fr'
-TIME_ZONE = 'Africa/Algiers'
-USE_I18N = True
-USE_TZ = True
-
-# ── Static Files ──────────────────────────────────────
-STATIC_URL = '/static/'
+# ── Static Files — WhiteNoise ─────────────────────────────────
+STATIC_URL  = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# Render's filesystem is wiped on every restart/redeploy, so anything saved to
-# MEDIA_ROOT there doesn't survive -- use Cloudinary when configured (set
-# CLOUDINARY_URL) so uploads persist; local dev without it just uses disk.
+# ── Media Files — Cloudinary (prod) ou local (dev) ───────────
 CLOUDINARY_URL = config('CLOUDINARY_URL', default=None)
-if CLOUDINARY_URL:
-    os.environ['CLOUDINARY_URL'] = CLOUDINARY_URL
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+if CLOUDINARY_URL:
+    # Production → Cloudinary
+    import cloudinary
+    import cloudinary.uploader
+    import cloudinary.api
+
+    os.environ['CLOUDINARY_URL'] = CLOUDINARY_URL
+
+    cloudinary.config(cloudinary_url=CLOUDINARY_URL)
+
+    CLOUDINARY_STORAGE = {'CLOUDINARY_URL': CLOUDINARY_URL}
+
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    MEDIA_URL = f'https://res.cloudinary.com/{cloudinary.config().cloud_name}/'
+
+else:
+    # Local → fichiers locaux
+    MEDIA_URL  = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# ── Auth ──────────────────────────────────────────────────────
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LANGUAGE_CODE = 'fr-fr'
+TIME_ZONE     = 'Africa/Algiers'
+USE_I18N = True
+USE_TZ   = True
+
+# ── DRF ──────────────────────────────────────────────────────
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -137,12 +152,13 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 50,
 }
 
+# ── JWT ───────────────────────────────────────────────────────
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME':  timedelta(days=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
-# ── إعدادات CORS الكاملة ─────────────────────────────
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
+# ── CORS ──────────────────────────────────────────────────────
+CORS_ALLOW_ALL_ORIGINS  = True
+CORS_ALLOW_CREDENTIALS  = True

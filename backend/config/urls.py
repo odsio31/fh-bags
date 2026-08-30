@@ -4,13 +4,39 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.http import HttpResponse, JsonResponse
 from django.db import connection
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def health(request):
-    return JsonResponse({
-        'database': connection.vendor,
-        'debug': settings.DEBUG,
-    })
+    info = {'database': connection.vendor, 'debug': settings.DEBUG}
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute('SELECT 1')
+        info['connection_ok'] = True
+    except Exception:
+        logger.exception('health check: DB connection failed')
+        info['connection_ok'] = False
+        return JsonResponse(info, status=500)
+
+    try:
+        table_names = connection.introspection.table_names()
+        info['table_count'] = len(table_names)
+        info['has_auth_user_table'] = 'auth_user' in table_names
+    except Exception:
+        logger.exception('health check: introspection failed')
+
+    try:
+        from django.contrib.auth import get_user_model
+        User = get_user_model()
+        info['user_count'] = User.objects.count()
+        info['superuser_count'] = User.objects.filter(is_superuser=True).count()
+    except Exception:
+        logger.exception('health check: user query failed')
+
+    return JsonResponse(info)
 
 
 urlpatterns = [

@@ -2,12 +2,22 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.db import connection
+
+
+def health(request):
+    return JsonResponse({
+        'database': connection.vendor,
+        'debug': settings.DEBUG,
+    })
+
 
 urlpatterns = [
     # منع أخطاء favicon 400/404
     path('favicon.ico', lambda request: HttpResponse(status=204)),
-    
+
+    path('api/health/', health),
     path('admin/', admin.site.urls),
     path('api/products/', include('products.urls')),
     path('api/orders/',   include('orders.urls')),

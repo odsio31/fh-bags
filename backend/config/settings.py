@@ -31,6 +31,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 # ── Apps ──────────────────────────────────────────────────────
+# ملاحظة: تم وضع Cloudinary قبل staticfiles لمنع التضارب
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,9 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
+    
     'cloudinary_storage',
-    'django.contrib.staticfiles',
     'cloudinary',
+    'django.contrib.staticfiles',
+    
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
@@ -67,7 +70,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [{
-    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'BACKEND': 'django.template.backends.DjangoTemplates',
     'DIRS': [],
     'APP_DIRS': True,
     'OPTIONS': {'context_processors': [
@@ -103,6 +106,8 @@ else:
 STATIC_URL  = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
+WHITENOISE_MANIFEST_STRICT = False
+
 # ── Media Files — Cloudinary (prod) ou local (dev) ───────────
 CLOUDINARY_URL = config('CLOUDINARY_URL', default=None)
 
@@ -113,13 +118,16 @@ if CLOUDINARY_URL:
     import cloudinary.api
 
     os.environ['CLOUDINARY_URL'] = CLOUDINARY_URL
-
     cloudinary.config(cloudinary_url=CLOUDINARY_URL)
 
-    CLOUDINARY_STORAGE = {'CLOUDINARY_URL': CLOUDINARY_URL}
+    CLOUDINARY_STORAGE = {
+        'CLOUDINARY_URL': CLOUDINARY_URL
+    }
 
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    MEDIA_URL = f'https://res.cloudinary.com/{cloudinary.config().cloud_name}/'
+    
+    # ترك MEDIA_URL نسبي لمنع مضاعفة الرابط مع Cloudinary Storage
+    MEDIA_URL = '/media/'
 
 else:
     # Local → fichiers locaux
@@ -159,5 +167,5 @@ SIMPLE_JWT = {
 }
 
 # ── CORS ──────────────────────────────────────────────────────
-CORS_ALLOW_ALL_ORIGINS  = True
-CORS_ALLOW_CREDENTIALS  = True
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True

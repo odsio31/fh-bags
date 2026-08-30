@@ -121,10 +121,7 @@ if CLOUDINARY_URL:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
     MEDIA_URL = f'https://res.cloudinary.com/{cloudinary.config().cloud_name}/'
 
-else:
-    # Local → fichiers locaux
-    MEDIA_URL  = '/media/'
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # ── Auth ──────────────────────────────────────────────────────
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

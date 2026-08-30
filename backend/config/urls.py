@@ -1,9 +1,10 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.http import HttpResponse, JsonResponse
 from django.db import connection
+from django.views.static import serve as serve_static
 import logging
 
 logger = logging.getLogger(__name__)
@@ -51,10 +52,16 @@ urlpatterns = [
     path('api/admin/',    include('admin_api.urls')),
 ]
 
-# تقديم ملفات الـ Media فقط في بيئة التطوير المحلية
+# django.conf.urls.static.static() refuses to serve anything when DEBUG=False,
+# so it's a no-op in production even without this DEBUG guard. Media (user
+# uploads) has nothing else serving it there -- WhiteNoise only covers
+# STATIC_ROOT -- so register the static view for /media/ unconditionally.
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += [
+    re_path(r'^media/(?P<path>.*)$', serve_static, {'document_root': settings.MEDIA_ROOT}),
+]
 
 admin.site.site_header = "F&H BAGS Admin"
 admin.site.site_title  = "F&H BAGS"

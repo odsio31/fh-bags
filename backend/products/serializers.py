@@ -35,7 +35,17 @@ class ProductColorSerializer(serializers.ModelSerializer):
 
 
 def resolve_main_image(product, request=None):
-    """Return the best absolute image URL for a product."""
+    """Return the best absolute image URL for a product.
+
+    product.image (the "Photo principale" field) is authoritative when set;
+    the images gallery is only a fallback for products with no main photo.
+    """
+    if product.image:
+        try:
+            raw = product.image.url
+            return request.build_absolute_uri(raw) if request else 'http://localhost:8000' + raw
+        except Exception:
+            pass
     try:
         images = list(product.images.all())
         if images:
@@ -50,12 +60,6 @@ def resolve_main_image(product, request=None):
                 return main.image_url
     except Exception:
         pass
-    if product.image:
-        try:
-            raw = product.image.url
-            return request.build_absolute_uri(raw) if request else 'http://localhost:8000' + raw
-        except Exception:
-            pass
     return product.image_url or ''
 
 

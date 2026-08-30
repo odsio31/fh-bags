@@ -6,15 +6,15 @@ import './ProductCard.css'
 function getBestImage(product) {
   // 1. main_image from API (absolute URL)
   if (product.main_image && product.main_image.startsWith('http')) return product.main_image
-  // 2. gallery images
+  // 2. direct image field ("Photo principale")
+  if (product.image && product.image.startsWith('http')) return product.image
+  if (product.image && product.image.startsWith('/')) return 'https://fh-bags.onrender.com' + product.image
+  // 3. gallery images (fallback when no main photo is set)
   if (product.images?.length > 0) {
     const main = product.images.find(i => i.is_main) || product.images[0]
     if (main.url && main.url.startsWith('http')) return main.url
     if (main.image_url) return main.image_url
   }
-  // 3. direct image field
-  if (product.image && product.image.startsWith('http')) return product.image
-  if (product.image && product.image.startsWith('/')) return 'https://fh-bags.onrender.com' + product.image
   // 4. image_url fallback
   if (product.image_url) return product.image_url
   // 5. placeholder

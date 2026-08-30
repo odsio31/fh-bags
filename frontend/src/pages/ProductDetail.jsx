@@ -35,13 +35,9 @@ export default function ProductDetail() {
     getProduct(slug)
       .then(({ data }) => {
         setProduct(data)
-        // Set main image
-        if (data.images?.length > 0) {
-          const main = data.images.find(i => i.is_main) || data.images[0]
-          setMainImg(getImageUrl(main))
-        } else {
-          setMainImg(getBestImage(data))
-        }
+        // main_image already resolves to the main photo (product.image, falling
+        // back to the gallery), so just use it directly.
+        setMainImg(getBestImage(data))
       })
       .catch(() => setProduct(null))
       .finally(() => setLoading(false))

@@ -13,13 +13,14 @@ const FALLBACK = 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=20
 
 function getProductImg(p) {
   if (p.main_image && p.main_image.startsWith('http')) return p.main_image
+  if (p.image && p.image.startsWith('/')) return 'https://fh-bags.onrender.com' + p.image
+  if (p.image && p.image.startsWith('http')) return p.image
   if (p.images?.length > 0) {
     const main = p.images.find(i => i.is_main) || p.images[0]
     if (main.url && main.url.startsWith('http')) return main.url
     if (main.image_url) return main.image_url
   }
-  if (p.image && p.image.startsWith('/')) return 'https://fh-bags.onrender.com' + p.image
-  return p.image || p.image_url || FALLBACK
+  return p.image_url || FALLBACK
 }
 
 function getImgUrl(img) {

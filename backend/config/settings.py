@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary',
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
@@ -108,6 +110,15 @@ STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Render's filesystem is wiped on every restart/redeploy, so anything saved to
+# MEDIA_ROOT there doesn't survive -- use Cloudinary when configured (set
+# CLOUDINARY_URL) so uploads persist; local dev without it just uses disk.
+CLOUDINARY_URL = config('CLOUDINARY_URL', default=None)
+if CLOUDINARY_URL:
+    os.environ['CLOUDINARY_URL'] = CLOUDINARY_URL
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {

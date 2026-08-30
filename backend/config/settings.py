@@ -102,8 +102,7 @@ else:
 # ── Static Files — WhiteNoise ─────────────────────────────────
 STATIC_URL  = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
 # ── Media Files — Cloudinary (prod) ou local (dev) ───────────
 CLOUDINARY_URL = config('CLOUDINARY_URL', default=None)
 

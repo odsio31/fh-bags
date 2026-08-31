@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { getProduct } from '../services/api'
 import { useCart } from '../context/CartContext'
 import './ProductDetail.css'
@@ -20,6 +20,7 @@ function getImageUrl(imgObj) {
 
 export default function ProductDetail() {
   const { slug }    = useParams()
+  const navigate    = useNavigate()
   const { addItem } = useCart()
   const [product, setProduct]   = useState(null)
   const [loading, setLoading]   = useState(true)
@@ -35,14 +36,13 @@ export default function ProductDetail() {
     getProduct(slug)
       .then(({ data }) => {
         setProduct(data)
-        // main_image already resolves to the main photo (product.image, falling
-        // back to the gallery), so just use it directly.
         setMainImg(getBestImage(data))
       })
       .catch(() => setProduct(null))
       .finally(() => setLoading(false))
   }, [slug])
 
+  // إضافة للمجموع (إضافة فقط)
   const handleAdd = () => {
     if (product.colors?.length > 0 && !selectedColor) {
       setColorError('Veuillez choisir une couleur avant d\'ajouter au panier.')
@@ -52,6 +52,17 @@ export default function ProductDetail() {
     addItem(product, qty, selectedColor)
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
+  }
+
+  // الشراء المباشر (إضافة + تحويل مباشر لصفحة الدفع)
+  const handleBuyNow = () => {
+    if (product.colors?.length > 0 && !selectedColor) {
+      setColorError('Veuillez choisir une couleur avant d\'acheter.')
+      return
+    }
+    setColorError('')
+    addItem(product, qty, selectedColor)
+    navigate('/checkout')
   }
 
   const getStockInfo = () => selectedColor ? selectedColor.stock : (product?.stock || 0)
@@ -163,10 +174,23 @@ export default function ProductDetail() {
               </div>
             )}
 
-            <div className="detail-actions">
+            {/* ── Action Buttons ── */}
+            <div className="detail-actions" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', width: '100%' }}>
+  {/* زر الشراء المباشر بنفس ستايل زر السلة */}
+              <button
+                className="btn buy-now-btn"
+                onClick={handleBuyNow}
+                disabled={!isInStock()}
+              >
+                ⚡ Achetez maintenant
+              </button>
+
+              {/* زر إضافة للسلة */}
               <button
                 className={`btn ${added ? 'btn-gold' : 'btn-primary'} add-cart-btn`}
-                onClick={handleAdd} disabled={!isInStock()}>
+                onClick={handleAdd}
+                disabled={!isInStock()}
+              >
                 {added ? '✓ Ajoute au Panier !' : isInStock() ? 'Ajouter au Panier' : 'Epuise'}
               </button>
             </div>
@@ -190,28 +214,6 @@ export default function ProductDetail() {
           </div>
           <div className="tab-content">
             {tab === 'description' && <p>{product.description}</p>}
-            {tab === 'details' && (
-              <ul className="detail-list">
-                <li><strong>Matiere :</strong> Cuir pleine fleur premium</li>
-                <li><strong>Interieur :</strong> Doublure en daim avec poche zippee</li>
-                <li><strong>Quincaillerie :</strong> Dore brosse</li>
-                <li><strong>Entretien :</strong> Nettoyer avec un chiffon sec</li>
-                {product.colors?.length > 0 && (
-                  <li><strong>Couleurs :</strong> {product.colors.map(c => c.name).join(', ')}</li>
-                )}
-              </ul>
-            )}
-            {tab === 'livraison' && (
-              <div>
-                <p>Livraison partout en Algerie via Yallidine.</p><br />
-                <table className="livraison-table">
-                  <tbody>
-                    <tr><td>🏠 A domicile</td><td><strong>600 DA</strong></td><td>3-5 jours</td></tr>
-                    <tr><td>📦 Bureau Yallidine</td><td><strong>370 DA</strong></td><td>2-4 jours</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            )}
           </div>
         </div>
       </div>

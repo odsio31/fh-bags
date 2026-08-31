@@ -1,21 +1,46 @@
 import { Link } from 'react-router-dom'
 import './Footer.css'
+import { FaFacebookF, FaInstagram, FaTiktok } from 'react-icons/fa';
 
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-inner container">
         <div className="footer-brand">
-          <Link to="/" className="footer-logo">
-            <span>F&amp;H</span> BAGS
-          </Link>
-          <p>Sacs en cuir premium faits a la main. Des designs intemporels pour la femme moderne.</p>
-          <div className="footer-social">
-            {['I', 'P', 'F'].map((s, i) => (
-              <a key={i} href="#" className="social-link">{s}</a>
-            ))}
-          </div>
-        </div>
+  <Link to="/" className="footer-logo">
+    <span>F&amp;H</span> BAGS
+  </Link>
+  <p>Sacs en cuir premium faits a la main. Des designs intemporels pour la femme moderne.</p>
+      <div className="footer-social">
+        <a 
+          href="https://facebook.com/sido.bhl" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="social-link"
+          aria-label="Facebook"
+        >
+          <FaFacebookF />
+        </a>
+        <a 
+          href="https://instagram.com/sido.bhl" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="social-link"
+          aria-label="Instagram"
+        >
+          <FaInstagram />
+        </a>
+        <a 
+          href="https://tiktok.com/@sido.bhl" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="social-link"
+          aria-label="TikTok"
+        >
+          <FaTiktok />
+        </a>
+      </div>
+    </div>
 
         <div className="footer-col">
           <h4>Boutique</h4>

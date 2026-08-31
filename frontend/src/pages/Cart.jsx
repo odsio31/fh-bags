@@ -73,8 +73,8 @@ export default function Cart() {
               <span>{sousTotal.toLocaleString('fr-DZ')} DA</span>
             </div>
             <div className="livraison-info">
-              <div className="liv-option"><span>🏠 A domicile</span><strong>600 DA</strong></div>
-              <div className="liv-option"><span>📦 Bureau Yallidine</span><strong>370 DA</strong></div>
+              <div className="liv-option"><span>🏠 A domicile</span></div>
+              <div className="liv-option"><span>📦 Bureau Yallidine</span></div>
             </div>
             <div className="summary-divider" />
             <div className="summary-row summary-total">

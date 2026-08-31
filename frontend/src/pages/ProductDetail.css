@@ -1,3 +1,30 @@
+/* ─── Buy Now Button (Matching Add to Cart) ─── */
+.buy-now-btn {
+  width: 100%;
+  font-size: 0.8rem;
+  padding: 1rem;
+  justify-content: center;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background-color: var(--brown-dk, #1e1208);
+  color: var(--cream, #fff);
+  border: 1px solid var(--brown-dk, #1e1208);
+  border-radius: var(--radius, 4px);
+  cursor: pointer;
+  transition: all var(--dur, 0.3s ease);
+}
+
+.buy-now-btn:hover:not(:disabled) {
+  background-color: var(--gold, #c5a059);
+  border-color: var(--gold, #c5a059);
+  color: #fff;
+}
+
+.buy-now-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 .breadcrumb {
   display: flex; gap: 0.5rem; align-items: center;
   padding: 1.5rem 0;

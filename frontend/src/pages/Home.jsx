@@ -50,7 +50,7 @@ export default function Home() {
       {/* ── Marquee ── */}
       <div className="marquee-strip">
         <div className="marquee-track">
-          {['Cuir Pleine Fleur', 'Design Intemporel', 'Qualite Premium', 'Livraison Partout en Algerie', 'Yallidine 370 DA', 'Domicile 600 DA', 'Confirmation WhatsApp', 'Cuir Pleine Fleur', 'Design Intemporel', 'Qualite Premium', 'Livraison Partout en Algerie', 'Yallidine 370 DA'].map((t, i) => (
+          {['Cuir Pleine Fleur', 'Design Intemporel', 'Qualite Premium', 'Livraison Partout en Algerie',  'Confirmation WhatsApp', 'Cuir Pleine Fleur', 'Design Intemporel', 'Qualite Premium', 'Livraison Partout en Algerie', 'Yallidine 370 DA'].map((t, i) => (
             <span key={i}>{t} <span className="dot">◆</span></span>
           ))}
         </div>
@@ -114,10 +114,10 @@ export default function Home() {
         <div className="container">
           <div className="why-grid">
             <div className="why-text">
-              <span className="eyebrow">Pourquoi F&amp;H Bags</span>
+              <span className="eyebrow">Pourquoi F&amp;B Bags</span>
               <h2>Plus qu'un Sac —<br /><em>Un Art de Vivre</em></h2>
               <div className="divider" style={{ margin: '1.2rem 0' }} />
-              <p>Chaque sac F&H est ne d'une passion pour la qualite. Nous selectionnons les meilleurs cuirs et collaborons avec des artisans pour creer des pieces parfaites.</p>
+              <p>Chaque sac F&B est ne d'une passion pour la qualite. Nous selectionnons les meilleurs cuirs et collaborons avec des artisans pour creer des pieces parfaites.</p>
               <ul className="why-list">
                 {[
                   'Cuir pleine fleur premium',

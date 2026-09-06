@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="footer-inner container">
         <div className="footer-brand">
   <Link to="/" className="footer-logo">
-    <span>F&amp;H</span> BAGS
+    <span>F&amp;B</span> BAGS
   </Link>
   <p>Sacs en cuir premium faits a la main. Des designs intemporels pour la femme moderne.</p>
       <div className="footer-social">

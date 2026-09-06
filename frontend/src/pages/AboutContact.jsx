@@ -22,7 +22,7 @@ export function About() {
         <div className="container">
           <div className="story-grid">
             <div className="story-text">
-              <span className="eyebrow">The F&amp;H Philosophy</span>
+              <span className="eyebrow">The F&amp;HBPhilosophy</span>
               <h2>Where Craft Meets Elegance</h2>
               <div className="divider" style={{ margin: '1.2rem 0' }} />
               <p>F&H Bags was founded in 2018 with a simple belief: every woman deserves a bag that feels as beautiful as it looks. We began as a small atelier, hand-selecting the finest leathers from Italian tanneries and collaborating with artisan craftspeople to bring our designs to life.</p>
@@ -85,9 +85,9 @@ export function Contact() {
             <div className="contact-details">
               {[
                 { label: 'Email',    value: 'hello@fhbags.com', icon: '✉️' },
-                { label: 'Phone',   value: '+1 (555) 234-5678', icon: '📞' },
-                { label: 'Hours',   value: 'Mon–Fri, 9am–6pm', icon: '🕐' },
-                { label: 'Address', value: '24 Leather Lane, Paris 75001', icon: '📍' },
+                { label: 'Phone',   value: '05555555', icon: '📞' },
+                { label: 'Hours',   value: 'samedi–jeudi, 10am–8pm', icon: '🕐' },
+                { label: 'Address', value: 'rue arbi ben mhidi', icon: '📍' },
               ].map(d => (
                 <div key={d.label} className="contact-detail-item">
                   <span className="detail-icon">{d.icon}</span>

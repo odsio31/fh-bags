@@ -25,7 +25,7 @@ export default function Navbar() {
         </button>
 
         <Link to="/" className="logo" onClick={() => setMenuOpen(false)}>
-          <span className="logo-fh">F&amp;H</span>
+          <span className="logo-fh">F&amp;B</span>
           <span className="logo-bags">BAGS</span>
         </Link>
 

@@ -85,8 +85,8 @@ export function Contact() {
             <div className="contact-details">
               {[
                 { label: 'Email',    value: 'hello@fhbags.com', icon: '✉️' },
-                { label: 'Phone',   value: '05555555', icon: '📞' },
-                { label: 'Hours',   value: 'samedi–jeudi, 10am–8pm', icon: '🕐' },
+                { label: 'Phone',   value: '0555881518', icon: '📞' },
+                { label: 'Hours',   value: 'sat–thu, 10am–8pm', icon: '🕐' },
                 { label: 'Address', value: 'rue arbi ben mhidi', icon: '📍' },
               ].map(d => (
                 <div key={d.label} className="contact-detail-item">
@@ -100,22 +100,7 @@ export function Contact() {
             </div>
           </div>
 
-          <form className="contact-form" onSubmit={e => { e.preventDefault(); alert('Message sent! We will reply within 24 hours.') }}>
-            <h3>Send a Message</h3>
-            <div className="form-row-2">
-              <div className="form-group"><label>First Name</label><input required /></div>
-              <div className="form-group"><label>Last Name</label><input required /></div>
-            </div>
-            <div className="form-group"><label>Email *</label><input type="email" required /></div>
-            <div className="form-group"><label>Subject</label><input /></div>
-            <div className="form-group">
-              <label>Message *</label>
-              <textarea rows={5} required style={{ resize: 'vertical' }} />
-            </div>
-            <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
-              Send Message
-            </button>
-          </form>
+          
         </div>
       </div>
     </main>

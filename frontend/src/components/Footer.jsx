@@ -13,7 +13,7 @@ export default function Footer() {
   <p>Sacs en cuir premium faits a la main. Des designs intemporels pour la femme moderne.</p>
       <div className="footer-social">
         <a 
-          href="https://facebook.com/sido.bhl" 
+          href="https://www.facebook.com/people/Fb-sac-oran/61551993502945/?locale=fr_FR" 
           target="_blank" 
           rel="noopener noreferrer" 
           className="social-link"
@@ -22,7 +22,7 @@ export default function Footer() {
           <FaFacebookF />
         </a>
         <a 
-          href="https://instagram.com/sido.bhl" 
+          href="https://www.instagram.com/fbsac_oran/" 
           target="_blank" 
           rel="noopener noreferrer" 
           className="social-link"
@@ -31,7 +31,7 @@ export default function Footer() {
           <FaInstagram />
         </a>
         <a 
-          href="https://tiktok.com/@sido.bhl" 
+          href="https://tiktok.com/@fh.bags1" 
           target="_blank" 
           rel="noopener noreferrer" 
           className="social-link"

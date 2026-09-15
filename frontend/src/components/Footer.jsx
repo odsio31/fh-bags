@@ -72,7 +72,7 @@ export default function Footer() {
               
             </div>
             <div className="footer-liv-item">
-              <span>📦 Bureau Yallidine</span>
+              <span>📦 Bureau ZRexpress</span>
               
             </div>
             <p className="footer-liv-note">

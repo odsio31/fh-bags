@@ -59,7 +59,7 @@ export default function Confirmation() {
             <div className="conf-divider"/>
             <div className="conf-row"><span>Sous-total</span><span>{parseFloat(order.sous_total).toLocaleString('fr-DZ')} DA</span></div>
             <div className="conf-row">
-              <span>Livraison ({order.type_livraison==='domicile'?'Domicile':'Bureau Yallidine'})</span>
+              <span>Livraison ({order.type_livraison==='domicile'?'Domicile':'Bureau ZRexpress'})</span>
               <span>{parseFloat(order.frais_livraison).toLocaleString('fr-DZ')} DA</span>
             </div>
             <div className="conf-divider"/>
@@ -71,7 +71,7 @@ export default function Confirmation() {
             <div className="conf-info-block">
               {[['Nom complet',`${order.prenom} ${order.nom}`],['WhatsApp',order.whatsapp],
                 ['Wilaya',order.wilaya],['Commune',order.commune],['Adresse',order.adresse],
-                ['Mode livraison',order.type_livraison==='domicile'?'🏠 A domicile':'📦 Bureau Yallidine'],
+                ['Mode livraison',order.type_livraison==='domicile'?'🏠 A domicile':'📦 Bureau ZRexpress'],
                 ['Statut','En attente de confirmation'],
               ].map(([label,val])=>(
                 <div key={label} className="conf-info-row">

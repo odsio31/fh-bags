@@ -74,7 +74,7 @@ export default function Cart() {
             </div>
             <div className="livraison-info">
               <div className="liv-option"><span>🏠 A domicile</span></div>
-              <div className="liv-option"><span>📦 Bureau Yallidine</span></div>
+              <div className="liv-option"><span>📦 Bureau ZRexpress</span></div>
             </div>
             <div className="summary-divider" />
             <div className="summary-row summary-total">

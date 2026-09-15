@@ -31,7 +31,7 @@ export default function Home() {
           <div className="hero-delivery-badges">
             <span>🚚 Livraison partout en Algerie</span>
             <span>📱 Confirmation WhatsApp</span>
-            <span>📦 Yallidine </span>
+            <span>📦 ZRexpress </span>
           </div>
         </div>
         <div className="hero-image-wrap">
@@ -50,7 +50,7 @@ export default function Home() {
       {/* ── Marquee ── */}
       <div className="marquee-strip">
         <div className="marquee-track">
-          {['Cuir Pleine Fleur', 'Design Intemporel', 'Qualite Premium', 'Livraison Partout en Algerie',  'Confirmation WhatsApp', 'Cuir Pleine Fleur', 'Design Intemporel', 'Qualite Premium', 'Livraison Partout en Algerie', 'Yallidine 370 DA'].map((t, i) => (
+          {['Cuir Pleine Fleur', 'Design Intemporel', 'Qualite Premium', 'Livraison Partout en Algerie',  'Confirmation WhatsApp', 'Cuir Pleine Fleur', 'Design Intemporel', 'Qualite Premium', 'Livraison Partout en Algerie', 'ZRexpress'].map((t, i) => (
             <span key={i}>{t} <span className="dot">◆</span></span>
           ))}
         </div>
@@ -154,7 +154,7 @@ export default function Home() {
               { num: '01', icon: '🛍️', title: 'Choisissez votre sac',   text: 'Parcourez notre collection et ajoutez vos articles au panier.' },
               { num: '02', icon: '📋', title: 'Remplissez le formulaire', text: 'Entrez vos coordonnees et choisissez votre mode de livraison.' },
               { num: '03', icon: '✅', title: 'Confirmez la commande',    text: 'Cliquez sur Commander. Nous vous contactons sur WhatsApp.' },
-              { num: '04', icon: '📦', title: 'Recevez votre colis',      text: 'Livraison a domicile ou en bureau Yallidine sous 1-5 jours.' },
+              { num: '04', icon: '📦', title: 'Recevez votre colis',      text: 'Livraison a domicile ou en bureau ZRexpress sous 1-5 jours.' },
             ].map(s => (
               <div key={s.num} className="step-card">
                 <span className="step-num-badge">{s.num}</span>
@@ -170,7 +170,7 @@ export default function Home() {
       {/* ── CTA Banner ── */}
       <section className="cta-banner">
         <div className="cta-content container">
-          <h2>Livraison Yallidine </h2>
+          <h2>Livraison ZRexpress </h2>
           <p>Livraison rapide et securisee partout en Algerie. Confirmation par WhatsApp garantie.</p>
           <Link to="/shop" className="btn btn-gold">Commander Maintenant</Link>
         </div>

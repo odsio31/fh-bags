@@ -192,7 +192,7 @@ export default function Checkout() {
                   <div className="liv-card-content">
                     <div className="liv-icon">📦</div>
                     <div className="liv-details">
-                      <strong>Bureau Yallidine</strong>
+                      <strong>Bureau ZRexpress</strong>
                       <span>Retrait dans le bureau le plus proche</span>
                       <span className="liv-delay">2 - 4 jours ouvrables</span>
                     </div>

@@ -1,3 +1,5 @@
+from decimal import Decimal
+from django.db import transaction
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.generics import RetrieveAPIView
@@ -13,10 +15,11 @@ def get_shipping_price(wilaya, type_livraison):
     try:
         from shipping.models import ShippingRate
         rate = ShippingRate.objects.get(wilaya=wilaya, is_active=True)
-        return float(rate.price_domicile if type_livraison == 'domicile' else rate.price_bureau)
+        price = rate.price_domicile if type_livraison == 'domicile' else rate.price_bureau
+        return Decimal(str(price))
     except Exception:
-        # Defaults if wilaya not found
-        return 600 if type_livraison == 'domicile' else 370
+        # Defaults if wilaya not found (Use Decimal to avoid float/Decimal crash)
+        return Decimal('600.00') if type_livraison == 'domicile' else Decimal('370.00')
 
 
 class OrderCreateView(APIView):
@@ -32,36 +35,52 @@ class OrderCreateView(APIView):
         wilaya   = data.get('wilaya', '')
         type_liv = data['type_livraison']
 
-        # Get wilaya-based shipping price
+        # Get wilaya-based shipping price as Decimal
         frais = get_shipping_price(wilaya, type_liv)
 
-        sous_total = 0
+        sous_total = Decimal('0.00')
         resolved   = []
+        
         for item in items:
             try:
                 p = Product.objects.get(id=item['product_id'], is_available=True)
             except Product.DoesNotExist:
-                return Response({'error': f"Produit #{item['product_id']} introuvable."}, status=404)
-            sous_total += p.price * item['quantity']
+                return Response({'error': f"Produit #{item['product_id']} introuvable."}, status=status.HTTP_404_NOT_FOUND)
+            
+            # Ensure p.price is Decimal
+            price = Decimal(str(p.price))
+            sous_total += price * item['quantity']
             resolved.append((p, item['quantity'], item.get('color_name', ''), item.get('color_hex', '')))
 
-        order = Order.objects.create(
-            **data,
-            frais_livraison=frais,
-            sous_total=sous_total,
-            total=sous_total + frais
-        )
-        for p, qty, cn, ch in resolved:
-            OrderItem.objects.create(
-                order=order, product=p,
-                product_name=p.name, product_price=p.price,
-                quantity=qty, color_name=cn, color_hex=ch
-            )
-            if not p.colors.exists():
-                p.stock = max(0, p.stock - qty)
-                p.save()
+        try:
+            with transaction.atomic():
+                order = Order.objects.create(
+                    **data,
+                    frais_livraison=frais,
+                    sous_total=sous_total,
+                    total=sous_total + frais
+                )
+                
+                for p, qty, cn, ch in resolved:
+                    OrderItem.objects.create(
+                        order=order, 
+                        product=p,
+                        product_name=p.name, 
+                        product_price=p.price,
+                        quantity=qty, 
+                        color_name=cn, 
+                        color_hex=ch
+                    )
+                    
+                    if hasattr(p, 'colors') and not p.colors.exists():
+                        p.stock = max(0, p.stock - qty)
+                        p.save()
 
-        return Response(OrderSerializer(order).data, status=status.HTTP_201_CREATED)
+            return Response(OrderSerializer(order).data, status=status.HTTP_201_CREATED)
+            
+        except Exception as e:
+            # Handle database creation error
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class OrderDetailView(RetrieveAPIView):
